@@ -1,0 +1,49 @@
+server:
+  port: 8081
+ 
+spring:
+  application:
+    name: demo
+  #数据库配置
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://10.52.72.186:3306/demo_test?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #redis配置
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: iws123456
+    timeout: 1000
+    lettuce:
+      pool:
+        max-active: 200
+        max-wait: -1
+        max-idle: 10
+        min-idle: 0
+    
+    
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.gwi.hns.demo.entity
+ 
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug
+        
+        
+payparams:
+  merchantNo: 104310153111011
+  #no_credit-指定不能使用信用卡支付
+  limitPay: 
+  #二维码有效时间
+  qrValidTime: 60
+  #超时时间(s)
+  OrderTimeoutDate: 600
+  orderUrl: 
+  signData: MIIEhAYJKoZIhvcNAQcCoIIEdTCCBHECAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHAaCCA0UwggNBMIICKaADAgECAgUQNlAJMTANBgkqhkiG9w0BAQUFADBYMQswCQYDVQQGEwJDTjEwMC4GA1UEChMnQ2hpbmEgRmluYW5jaWFsIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MRcwFQYDVQQDEw5DRkNBIFRFU1QgT0NBMTAeFw0xOTAyMTEwNDQ3MTZaFw0yMTAyMTEwNDQ3MTZaMGIxCzAJBgNVBAYTAmNuMQwwCgYDVQQKEwNCT0MxEDAOBgNVBAsTB0JPQy1UUEMxGDAWBgNVBAsTD09yZ2FuaXphdGlvbmFsMjEZMBcGA1UEAxMQOTU1NjZTWjA0NTAwMTU0MTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAz+efo6rBaodtrA68knJtZBVzOiG+BIJlA5Fs3cij47/roPDL8x5tkxYg5uvfuKR5ahyTInKx1JLB+tg+yP3AfsP7MvMAzr/+WZmmLq+Bp3Q/60kjbktfFCtdCGOyXQf8pq8xMVupygjdqILgLwjxVN4JPa2tl0Evu3vt550FlyECAwEAAaOBizCBiDAfBgNVHSMEGDAWgBTPcJ1h6518Lrj3ywJA9wmd/jN0gDA5BgNVHR8EMjAwMC6gLKAqhihodHRwOi8vdWNybC5jZmNhLmNvbS5jbi9SU0EvY3JsNzAyNTYuY3JsMAsGA1UdDwQEAwIEMDAdBgNVHQ4EFgQU96QitL9jTjKRONBhS0gc0lVgZ8EwDQYJKoZIhvcNAQEFBQADggEBACn6Rt2APPRuUQZkgH1y4bNbSYG3/6h2bpd11WVU9XLFYHqAh3/PDa97V0IQJy/f8b+VxSQar8r35PNIiet4to+cZd6jfkOyZLPfY7w34EurwQKsUzupS69lQ7T5UL+PSAYQalT80Yk7gmfl9P0bNALImnPVK3mN0q6O6RKbw7iRoqqlpRLoQeYNoUPl6gnnER5Krtg8rCAqEmFZBr80Y8079cwfUbM34L0RUN0fuClqtsx5VqGJ2+I8VuNhiyu9G+8t1goxUz9gGwDo1G5ymdGcNdo+EUWuG6HEO06N5CWc+8/PFlIUFGPxiiOxHooT4Hf9IzXBlAjW9oLYIkFn7jUxggEHMIIBAwIBATBhMFgxCzAJBgNVBAYTAkNOMTAwLgYDVQQKEydDaGluYSBGaW5hbmNpYWwgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkxFzAVBgNVBAMTDkNGQ0EgVEVTVCBPQ0ExAgUQNlAJMTAJBgUrDgMCGgUAMA0GCSqGSIb3DQEBAQUABIGAYlvSMdltXRq++srW10scbjkigDtzAXnbI6CLaSWkQtNZcOC+nhmayToZoJJbNJObpSHu5McRsqn8+dYmSCOZ4hmqa6aMaGPS3rI/0oSEO9aopCtexv4ag+bW35mqJXNsQCoXI/XF9w0uVQ0d0FSBDFVgPtb4SF6J5Ld0HNAOP+I=

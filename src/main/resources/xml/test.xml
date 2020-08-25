@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<res>
+  <header>
+    <msgId>0000260</msgId>
+    <hdlSts>A</hdlSts>
+    <bdFlg>0</bdFlg>
+    <rtnCd></rtnCd>
+  </header>
+  <body>
+    <orderSeq>1071522236</orderSeq>
+    <qrCode><![CDATA[https://qr.95516.com/01040000/0269537452579999660892?orderType=10&merChannel=IPPS]]></qrCode>
+    <qrValidTime>20231201155625</qrValidTime>
+    <tranStatus></tranStatus>
+    <tradeType></tradeType>
+    <tranCode></tranCode>
+    <tranMsg></tranMsg>
+    <prepayId></prepayId>
+    <code_url></code_url>
+    <mweb_url></mweb_url>
+    <wcPayDataAppId></wcPayDataAppId>
+    <wcPayDataPartnerId></wcPayDataPartnerId>
+    <wcPayDataPrepayId></wcPayDataPrepayId>
+    <wcPayDataTimeStamp></wcPayDataTimeStamp>
+    <wcPayDataNonceStr></wcPayDataNonceStr>
+    <wcPayDataPackage></wcPayDataPackage>
+    <wcPayDataSignType></wcPayDataSignType>
+    <wcPayDataPaySign></wcPayDataPaySign>
+    <order_str></order_str>
+  </body>
+</res>
