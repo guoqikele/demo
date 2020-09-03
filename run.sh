@@ -1,14 +1,14 @@
 #!/bin/bash
 #容器名称
 CONTAINT_NAME=springio-demo
-JAR_PATH=/root/docker/demo/
+JAR_PATH=/root/docker/demo-develop1/
 VARR=X
 #镜像名称
 IMAGE_NAME=springio-demo
 VERSION=latest
 LOCAL_DEPOSITORY=192.168.71.3:6000
 RUN_CONTAINT=`docker ps | grep ${CONTAINT_NAME}`
-echo $RUN_CONTAINT
+echo ${RUN_CONTAINT}
 #判断容器是否启动
 if [ ${VARR}${RUN_CONTAINT} = $VARR ]
 then
