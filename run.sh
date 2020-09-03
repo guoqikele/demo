@@ -8,7 +8,7 @@ IMAGE_NAME=springio-demo
 RUN_CONTAINT=`docker ps | grep ${CONTAINT_NAME}`
 echo $RUN_CONTAINT
 #判断容器是否启动
-if [ X"$RUN_CONTAINT" = "X" ]
+if [ "$VARR$RUN_CONTAINT" = "$VARR" ]
 then
 	#暂停容器
 	docker stop ${CONTAINT_NAME}
@@ -21,7 +21,7 @@ then
 else
 	#判断容器是否存在
 	EXIST_CONTAINT=`docker ps -a | grep ${CONTAINT_NAME}`
-	if ["$VARR$EXIST_CONTAINT" = "$VARR"]
+	if [ "$VARR$EXIST_CONTAINT" = "$VARR" ]
 	then
 		#删除容器
 		docker rm $CONTAINT_NAME
@@ -34,7 +34,7 @@ else
 		EXIST_IMAGE=`docker images | grep IMAGE_NAME`
 		echo $EXIST_IMAGE
 		#存在则删除镜像
-		if ["$VARR$EXIST_IMAGE" = "$VARR"]
+		if [ "$VARR$EXIST_IMAGE" = "$VARR" ]
 		then
 			#删除镜像
 			docker rmi $IMAGE_NAME
