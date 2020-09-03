@@ -6,7 +6,7 @@ VARR="X"
 #镜像名称
 IMAGE_NAME=springio-demo
 VERSION=latest
-LOCAL_DEPOSITORY=demo
+LOCAL_DEPOSITORY=192.168.71.3:6000
 RUN_CONTAINT=`docker ps | grep ${CONTAINT_NAME}`
 echo $RUN_CONTAINT
 #判断容器是否启动
@@ -47,7 +47,7 @@ fi
 #进入jar所在目录
 cd $JAR_PATH
 pwd
-#重新打包镜像
+#拉取镜像
 docker pull $LOCAL_DEPOSITORY/$IMAGE_NAME:$VERSION
 echo "镜像${IMAGE_NAME}打包完成"
 #运行镜像
