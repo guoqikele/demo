@@ -7,7 +7,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.1.RELEASE</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.gwi.hns</groupId>
     <artifactId>demo</artifactId>
@@ -21,8 +21,10 @@
         <mybatis.version>1.3.2</mybatis.version>
         <redis.start.version>2.2.8.RELEASE</redis.start.version>
         <commons-pool2.version>2.8.0</commons-pool2.version>
-        <!--properties节点中设置docker镜像的前缀“springboot”-->
-        <docker.image.prefix>springio</docker.image.prefix>
+        <!-- 仓库地址 -->
+        <image.name>demo/springio</image.name>
+        <docker.repository>http://192.168.71.3:2375</docker.repository>
+        <regist.repository>192.168.71.3:6000</regist.repository>
     </properties>
 
     <dependencies>
@@ -134,28 +136,57 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!-- tag::plugin[] -->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.13</version>
+                <executions>
+                    <execution>
+                        <id>build-image</id>     <!--定义一个执行命令的id-->
+                        <phase>package</phase>   <!--绑定mvn的哪个命令-->
+                        <goals>
+                            <goal>build</goal>   <!--要执行的命令 -->
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>image-tag</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>tag</goal>      <!--tag命令，相当于docker的tag命令-->
+                        </goals>
+                        <configuration>
+                            <image>${image.name}:${project.version}</image>   <!--镜像名-->
+                            <newName>${regist.repository}/${image.name}:${project.version}</newName>   <!--打的标签名-->
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>package-push</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>push</goal>    <!--相当于docker的push命令-->
+                        </goals>
+                        <configuration>
+                            <imageName>${regist.repository}/${image.name}:${project.version}</imageName>  <!--要push的镜像名-->
+                        </configuration>
+                    </execution>
+
+                </executions>
                 <configuration>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                    <dockerDirectory>src/main/resources/docker</dockerDirectory>
+                    <forceTags>true</forceTags>    <!--覆盖相同标签镜像-->
+                    <imageName>${image.name}:${project.version}</imageName>  <!--指定镜像名称 仓库/镜像名:标签-->
+                    <baseImage>lwieske/java-8</baseImage>    <!--指定基础镜像，相当于dockerFile中的FROM<image> -->
+                    <dockerHost>${docker.repository}</dockerHost>  <!-- 指定仓库地址 -->
+                    <entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint> <!-- 容器启动执行的命令，相当于dockerFile的ENTRYPOINT -->
                     <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
+                        <resource>                                             <!-- 指定资源文件 -->
+                            <targetPath>/</targetPath>                         <!-- 指定要复制的目录路径，这里是当前目录 -->
+                            <directory>${project.build.directory}</directory>  <!-- 指定要复制的根目录，这里是target目录 -->
+                            <include>${project.build.finalName}.jar</include>  <!-- 指定需要拷贝的文件，这里指最后生成的jar包 -->
                         </resource>
                     </resources>
                 </configuration>
             </plugin>
-            <!-- end::plugin[] -->
-
         </plugins>
-
-        <!--<finalName>gs-spring-boot-docker-master</finalName>-->
     </build>
 
 </project>
