@@ -1,12 +1,12 @@
 #!/bin/bash
+VARR=X
 #容器名称
 CONTAINT_NAME=springio-demo
-JAR_PATH=/root/docker/demo-develop1/
-VARR=X
 #镜像名称
-VERSION=latest
-LOCAL_DEPOSITORY=192.168.71.3:6000
-IMAGE_NAME=${LOCAL_DEPOSITORY}/springio-demo:${VERSION}
+VERSION=0.0.1-SNAPSHOT
+IMAGE_NAME=demo/springio
+#标签名称
+REMOTE_IMAGE_NAME=192.168.71.3:6000/${IMAGE_NAME}:${VERSION}
 RUN_CONTAINT=`docker ps | grep ${CONTAINT_NAME}`
 echo ${RUN_CONTAINT}
 #判断容器是否启动
@@ -45,11 +45,7 @@ else
 		fi
 	fi
 fi
-#进入jar所在目录
-cd ${JAR_PATH}
-pwd
 #拉取镜像
-docker pull ${IMAGE_NAME}
-echo "镜像${IMAGE_NAME}打包完成"
+docker pull ${REMOTE_IMAGE_NAME}
 #运行镜像
-docker run -d -p 8081:8081 --name ${CONTAINT_NAME} ${IMAGE_NAME}
+docker run -d -p 8081:8081 --name ${CONTAINT_NAME} ${REMOTE_IMAGE_NAME}
