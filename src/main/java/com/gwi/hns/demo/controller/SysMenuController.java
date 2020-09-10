@@ -1,5 +1,8 @@
 package com.gwi.hns.demo.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +70,7 @@ public class SysMenuController {
     /**
      * 更新菜单状态
      * 
-     * @param menu
+     * @param menuId
      * @return
      */
     @PutMapping("/change/status/{menuId}")

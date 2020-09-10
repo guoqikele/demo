@@ -174,9 +174,9 @@
                 <configuration>
                     <forceTags>true</forceTags>    <!--覆盖相同标签镜像-->
                     <imageName>${image.name}:${project.version}</imageName>  <!--指定镜像名称 仓库/镜像名:标签-->
-                    <baseImage>lwieske/java-8</baseImage>    <!--指定基础镜像，相当于dockerFile中的FROM<image> -->
+                    <baseImage>java:8</baseImage>    <!--指定基础镜像，相当于dockerFile中的FROM<image> -->
                     <dockerHost>${docker.repository}</dockerHost>  <!-- 指定仓库地址 -->
-                    <entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint> <!-- 容器启动执行的命令，相当于dockerFile的ENTRYPOINT -->
+                    <entryPoint>["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]</entryPoint> <!-- 容器启动执行的命令，相当于dockerFile的ENTRYPOINT -->
                     <resources>
                         <resource>                                             <!-- 指定资源文件 -->
                             <targetPath>/</targetPath>                         <!-- 指定要复制的目录路径，这里是当前目录 -->
