@@ -1,23 +1,13 @@
 package com.gwi.hns.demo.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.gwi.hns.demo.entity.SysMenuEntity;
 import com.gwi.hns.demo.service.SysMenuService;
-import com.gwi.hns.demo.vo.ResponseEntity;
 import com.gwi.hns.demo.vo.MenuVo;
+import com.gwi.hns.demo.vo.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/sys/menu")
@@ -27,8 +17,8 @@ public class SysMenuController {
 
     /**
      * 获取菜单详情
-     * 
-     * @return
+     * @param menuId 菜单id
+     * @return 菜单信息
      */
     @GetMapping("/{menuId}")
     public ResponseEntity<SysMenuEntity> getMenu(@PathVariable String menuId) {
@@ -37,9 +27,8 @@ public class SysMenuController {
 
     /**
      * 创建菜单
-     * 
-     * @param menu
-     * @return
+     * @param menu 菜单对象
+     * @return 菜单id
      */
     @PostMapping
     public ResponseEntity<String> createMenu(@RequestBody SysMenuEntity menu) {
@@ -48,7 +37,7 @@ public class SysMenuController {
 
     /**
      * 分页查询
-     * 
+     * @param vo
      * @return
      */
     @GetMapping("/page")
