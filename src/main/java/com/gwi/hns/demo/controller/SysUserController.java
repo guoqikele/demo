@@ -1,31 +1,26 @@
 package com.gwi.hns.demo.controller;
 
-import java.util.List;
-import java.util.Set;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.gwi.hns.demo.entity.SysMenuEntity;
 import com.gwi.hns.demo.entity.SysUserEntity;
+import com.gwi.hns.demo.exception.CommonException;
 import com.gwi.hns.demo.service.SysUserService;
 import com.gwi.hns.demo.utils.SessionUtils;
 import com.gwi.hns.demo.vo.LoginVo;
 import com.gwi.hns.demo.vo.ResponseEntity;
 import com.gwi.hns.demo.vo.UserVo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Set;
 
 
 @RestController
 @RequestMapping("/sys/user")
+@Slf4j
 public class SysUserController {
     @Autowired
     private SysUserService userService;
@@ -47,7 +42,7 @@ public class SysUserController {
      * @return
      */
     @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody SysUserEntity user) {
+    public ResponseEntity<String> createUser(@RequestBody SysUserEntity user) throws CommonException {
         return userService.createUser(user);
     }
 
@@ -75,7 +70,7 @@ public class SysUserController {
     /**
      * 更新用户状态
      * 
-     * @param user
+     * @param userId
      * @return
      */
     @PutMapping("/change/status/{userId}")
@@ -90,7 +85,7 @@ public class SysUserController {
      * @return
      */
     @PostMapping("/login")
-    public ResponseEntity<LoginVo> login(@RequestBody SysUserEntity user) {
+    public ResponseEntity<LoginVo> login(@RequestBody SysUserEntity user) throws CommonException {
         return userService.login(user);
     }
 

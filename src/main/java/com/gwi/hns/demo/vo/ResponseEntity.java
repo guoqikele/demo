@@ -18,9 +18,4 @@ public class ResponseEntity<T> {
     public void successResp() {
         this.code = 200;
     }
-
-    public void failResp(ResponseConstant Constant) {
-        this.code = Constant.getCode();
-        this.errorMsg = Constant.getMsg();
-    }
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import com.gwi.hns.demo.exception.CommonException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -71,7 +72,7 @@ public class SysUserServiceImpl implements SysUserService {
      * 新增用户
      */
     @Override
-    public ResponseEntity<String> createUser(SysUserEntity user) {
+    public ResponseEntity<String> createUser(SysUserEntity user) throws CommonException {
         // 判断用户是否存在
         SysUserEntity userByName = userMapper.getUserByName(user.getName());
         ResponseEntity<String> resp = new ResponseEntity<String>();
@@ -84,7 +85,7 @@ public class SysUserServiceImpl implements SysUserService {
             resp.setData(user.getId());
             resp.successResp();
         } else {
-            resp.failResp(ResponseConstant.USER_EXIST);
+            throw new CommonException(ResponseConstant.USER_EXIST);
         }
         return resp;
     }
@@ -124,13 +125,12 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public ResponseEntity<LoginVo> login(SysUserEntity user) {
+    public ResponseEntity<LoginVo> login(SysUserEntity user) throws CommonException {
         // 验证用户名密码是否正确
         SysUserEntity loginUser = authLogin(user);
         ResponseEntity<LoginVo> resp = new ResponseEntity<LoginVo>();
         if (loginUser == null) {
-            resp.failResp(ResponseConstant.LOGING_FAILD);
-            return resp;
+            throw new CommonException(ResponseConstant.LOGING_FAILD);
         }
 
         String userId = loginUser.getId();

@@ -1,6 +1,7 @@
 package com.gwi.hns.demo.controller;
 
 import com.gwi.hns.demo.entity.SysMenuEntity;
+import com.gwi.hns.demo.exception.CommonException;
 import com.gwi.hns.demo.service.SysMenuService;
 import com.gwi.hns.demo.vo.MenuVo;
 import com.gwi.hns.demo.vo.ResponseEntity;
@@ -31,7 +32,7 @@ public class SysMenuController {
      * @return 菜单id
      */
     @PostMapping
-    public ResponseEntity<String> createMenu(@RequestBody SysMenuEntity menu) {
+    public ResponseEntity<String> createMenu(@RequestBody SysMenuEntity menu) throws CommonException {
         return menuService.createMenu(menu);
     }
 
